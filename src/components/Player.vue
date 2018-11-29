@@ -5,10 +5,10 @@
       <h1>Player Name</h1>
     </v-flex>
     <v-flex xs4>
-      <h1>Proud Team</h1>
+      <router-link :to="'/Teams'" class="nodecor"><h1>Proud Team</h1></router-link>
     </v-flex>
     <v-flex xs4 >
-      <h1>Trips to the Clink</h1>
+      <h1>Different Offenses</h1>
     </v-flex>
   </v-layout>
   <br>
@@ -17,17 +17,17 @@
     <v-layout row>
     <v-flex xs4 >
       <v-card>
-        <v-card-text>{{ player.Name }}</v-card-text>
+        <router-link :to="'/PlayerInfo/' + player.Name" class="nodecor"><v-card-text>{{ player.Name }}</v-card-text></router-link>
       </v-card>
     </v-flex>
     <v-flex xs4 >
       <v-card>
-        <v-card-text>{{ player.Team_name }}</v-card-text>
+        <router-link :to="'/EachTeam/' + player.Team" class="nodecor"><v-card-text>{{ player.Team_name }}</v-card-text></router-link>
       </v-card>
     </v-flex>
     <v-flex xs4 >
       <v-card>
-        <v-card-text>{{ player.arrest_count }}</v-card-text>
+        <router-link :to="'/PlayerInfo/' + player.Name" class="nodecor"><v-card-text>{{ player.arrest_count }}</v-card-text></router-link>
       </v-card>
     </v-flex>
     </v-layout>
@@ -56,5 +56,9 @@
 <style>
 h1 {
   text-decoration: underline;
+}
+.nodecor {
+  text-decoration: none;
+  color: black;
 }
 </style>
