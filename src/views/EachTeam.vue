@@ -10,7 +10,7 @@
         <h1>Different Crimes Committed</h1>
       </v-flex>
     </v-layout>
-    <v-container v-for="guy in players" fluid class="vcon">
+    <v-container v-for="guy in players" :key="guy.Name" fluid class="vcon">
       <v-layout row>
         <v-flex xs6>
           <v-card>

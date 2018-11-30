@@ -11,17 +11,17 @@
         <h1>Arrest Count</h1>
       </v-flex>
     </v-layout>
-    <v-container v-for="team in teams" fluid class="vcon">
+    <v-container v-for="team in teams" :key="team.Team" fluid class="vcon">
       <v-layout row>
         <v-flex xs6>
-          <v-card>
-            <router-link :to="'/EachTeam/' + team.Team + '/' + team.Team_name" class="nodecor"><v-card-text>{{ team.Team_name }}</v-card-text></router-link>
-          </v-card>
+          <v-list>
+            <router-link :to="'/EachTeam/' + team.Team + '/' + team.Team_name" class="nodecor"><v-list-title>{{ team.Team_name }}</v-list-title></router-link>
+          </v-list>
         </v-flex>
         <v-flex xs6>
-          <v-card>
-            <v-card-text>{{ team.arrest_count }}</v-card-text>
-          </v-card>
+          <v-list>
+            <v-list-title>{{ team.arrest_count }}</v-list-title>
+          </v-list>
         </v-flex>
       </v-layout>
     </v-container>

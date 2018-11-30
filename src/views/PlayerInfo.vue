@@ -10,17 +10,17 @@
         <h1>Arrests for <em>THIS</em> Offense </h1>
       </v-flex>
     </v-layout>
-    <v-container v-for="guy in players" fluid class="vcon">
+    <v-container v-for="guy in players" :key="guy.category" fluid class="vcon">
       <v-layout row>
         <v-flex xs6>
-          <v-card>
-            <v-card-text>{{ guy.category }}</v-card-text>
-          </v-card>
+          <v-list>
+            <v-list-title>{{ guy.category }}</v-list-title>
+          </v-list>
         </v-flex>
         <v-flex xs6>
-          <v-card>
-           <v-card-text>{{ guy.arrest_count }}</v-card-text>
-          </v-card>
+          <v-list>
+           <v-list-title>{{ guy.arrest_count }}</v-list-title>
+          </v-list>
         </v-flex>
       </v-layout>
     </v-container>

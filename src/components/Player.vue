@@ -1,5 +1,13 @@
 <template>
 <div>
+  <div style="height: 160px; background-color: black;">
+    <img class="first" src="http://www.bltwebsite.com/maxMugShot.jpg">
+    <img class="second" src="http://www.bltwebsite.com/maxMugShot.jpg">
+	<h2 style="color: white; font-size: 3.5em;">NFL Role Models</h2>
+    <br>
+    <input type="text" class="searchBar" v-model="search" placeholder="Search for your son's role model!!" />
+
+  </div>
   <v-layout row>
     <v-flex xs4>
       <h1>Player Name</h1>
@@ -13,22 +21,22 @@
   </v-layout>
   <br>
 <div style="font-weight: bold; font-size: 1.5em;">
-    <v-container v-for="player in players" fluid >
+    <v-container v-for="player in filteredPlayers" :key="player.Name" fluid >
     <v-layout row>
     <v-flex xs4 >
-      <v-card>
-        <router-link :to="'/PlayerInfo/' + player.Name" class="nodecor"><v-card-text>{{ player.Name }}</v-card-text></router-link>
-      </v-card>
+      <v-list>
+        <router-link :to="'/PlayerInfo/' + player.Name" class="nodecor"><v-list-title>{{ player.Name }}</v-list-title></router-link>
+      </v-list>
     </v-flex>
     <v-flex xs4 >
-      <v-card>
-        <router-link :to="'/EachTeam/' + player.Team" class="nodecor"><v-card-text>{{ player.Team_name }}</v-card-text></router-link>
-      </v-card>
+      <v-list>
+        <router-link :to="'/EachTeam/' + player.Team + '/' + player.Team_name" class="nodecor"><v-list-title>{{ player.Team_name }}</v-list-title></router-link>
+      </v-list>
     </v-flex>
     <v-flex xs4 >
-      <v-card>
-        <router-link :to="'/PlayerInfo/' + player.Name" class="nodecor"><v-card-text>{{ player.arrest_count }}</v-card-text></router-link>
-      </v-card>
+      <v-list>
+        <router-link :to="'/PlayerInfo/' + player.Name" class="nodecor"><v-list-title>{{ player.arrest_count }}</v-list-title></router-link>
+      </v-list>
     </v-flex>
     </v-layout>
     </v-container>
@@ -41,8 +49,8 @@
         name: 'player',
         data() {
             return {
-                players: []
-                
+              players: [],
+              search: ''
             }
         },
         created() {
@@ -50,11 +58,56 @@
             console.log(info);
             this.players = info.body
           })
+        },
+        computed: {
+            filteredPlayers: function() {
+                return this.players.filter(player => {
+                    return player.Name.match(this.search)
+                })
+            }
         }
     }
 </script>
 <style>
+.first {
+	position: absolute;
+	left: 0;
+	height: 160px;
+	width: 160px;
+    animation: rTl 5s;
+}
+@keyframes rTl {
+    0% {
+        left: 100%
+    }
+    100% {
+        left: 0%;
+    }
+}
+.second {
+	position: absolute;
+	right: 0;
+	height: 160px;
+	width: 160px;
+    animation: lTr 5s;
+}
+@keyframes lTr {
+    0% {
+        right: 100%;
+    }
+    100% {
+        right: 0%;
+    }
+}
+.searchBar {
+  background-color: white;
+  width: 20%;
+  font-size: 1em;
+  text-align: center;
+  font-family: cursive;
+}
 h1 {
+  
   text-decoration: underline;
 }
 .nodecor {
